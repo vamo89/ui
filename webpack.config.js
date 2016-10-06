@@ -12,9 +12,21 @@ const postcssCF = require('postcss-color-function');
 
 const isProd = process.env.NODE_ENV === 'production';
 const config = {
-  entry: {
-    index: './src',
-  },
+  entry: [
+    //activate HMR for React
+    'react-hot-loader/patch',
+
+    //bundle the client for webpack dev server
+    //and connect to the provided endpoint
+    'webpack-dev-server/client?http://hchung.westus.cloudapp.azure.com:8080',
+
+    //bundle the client for hot reloading
+    //only- means to only hot reload for successful updates
+    'webpack/hot/only-dev-server',
+
+    //the entry point of our app,
+    './src/index.jsx',
+  ],
   output: {
     filename: `${isProd ? '[hash].' : ''}bundle.js`,
     path: 'build/',
@@ -55,7 +67,10 @@ const config = {
       exclude: /(node_modules)/,
       loader: 'babel', // 'babel-loader' is also a legal name to reference
       query: {
-        presets: ['stage-3', 'react', 'es2015'],
+        presets: ['stage-3', 'react', ["es2015", {
+          'modules': false
+        }]],
+        plugins: ['react-hot-loader/babel'],
       },
     }],
   },
