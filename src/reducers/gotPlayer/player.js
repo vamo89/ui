@@ -72,15 +72,7 @@ export default combineReducers({
 
 
 export const getPlayer = {
-  getPlayerById: (state, id) => {
-    // this feels like a hack
-    if (!state.app.gotPlayer.playerReducer.byId[id]) {
-      return {
-        ...initialState,
-      };
-    }
-    return state.app.gotPlayer.playerReducer.byId[id];
-  },
+  getPlayerById: (state, id) => state.app.gotPlayer.playerReducer.byId[id] || { ...initialState },
   getError: (state, id) => getPlayer.getPlayerById(state, id).error,
   getLoading: (state, id) => getPlayer.getPlayerById(state, id).loading,
   isLoaded: (state, id) => getPlayer.getPlayerById(state, id).loaded,
@@ -90,7 +82,7 @@ export const getPlayer = {
   getPlayerName: (state, id) => getPlayer.getPlayer(state, id).profile.personaname,
   getLastLogin: (state, id) => getPlayer.getPlayer(state, id).profile.last_login,
   getMmrEstimate: (state, id) => getPlayer.getPlayer(state, id).mmr_estimate,
-  getSoloMmrEstimate: (state, id) => getPlayer.getPlayer(state, id).solo_competitive_rank,
+  getSoloCompetitiveRank: (state, id) => getPlayer.getPlayer(state, id).solo_competitive_rank,
   getCompetitiveRank: (state, id) => getPlayer.getPlayer(state, id).competitive_rank,
   getPicture: (state, id) => getPlayer.getProfile(state, id).avatarmedium,
   getPictureFull: (state, id) => getPlayer.getProfile(state, id).avatarfull,

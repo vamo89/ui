@@ -13,6 +13,8 @@
   "app_twitter": "Follow on Twitter",
   "app_github": "Source on GitHub",
   "app_discord": "Chat on Discord",
+  "app_dotacoach": "Ask a Coach",
+  "app_refresh": "Refresh Match History: Queue a scan to find missing matches due to match privacy setting",
 
   "distributions_mmr": "Solo MMR",
   "distributions_country_mmr": "Solo MMR By Country",
